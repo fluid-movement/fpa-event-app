@@ -34,12 +34,12 @@ class Group extends Model
 
     public function getLinkAttribute(): string
     {
-        return route('groups.show', $this->slug);
+        return route('groups.view', $this->slug);
     }
 
     protected static function booted()
     {
-        static::addGlobalScope(new OrderByName());
+        static::addGlobalScope(new OrderByName);
 
         static::creating(function ($model) {
             $model->setSlug();

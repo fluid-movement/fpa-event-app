@@ -2,18 +2,16 @@
 
 namespace App\DTO;
 
-class PlayerDTO
+readonly class PlayerDTO
 {
     public function __construct(
-        readonly string $id,
-        readonly string $first_name,
-        readonly string $last_name,
-        readonly string $gender,
-        readonly string $country,
-        readonly string $membership,
-        readonly string $last_active,
-        readonly string $created_at
-    )
-    {
-    }
+        public string $id,
+        public string $first_name,
+        public string $last_name,
+        public string $gender,
+        public string $country,
+        public string $membership,
+        public string $last_active,
+        public string $created_at
+    ) {}
 }

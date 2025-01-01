@@ -2,10 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\Event;
 use App\Models\Group;
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class GroupSeeder extends Seeder
@@ -19,7 +16,7 @@ class GroupSeeder extends Seeder
             'Alpenbrise Munich', 'Seattle Rainjammers', 'New York Sheep Meadow Jammers', 'Durham Jammers',
             'Jacksonville Jammers', 'Rome Jammers'];
         foreach ($groups as $name) {
-            Group::factory()->hasEvents(rand(1,5))->create([
+            Group::factory()->hasEvents(rand(1, 5))->create([
                 'name' => $name,
                 'slug' => \Str::slug($name),
             ]);

@@ -8,8 +8,7 @@ use App\Models\Result;
 class ImportResults
 {
     /**
-     * @param array $data array of ResultDTO objects
-     * @return void
+     * @param  array  $data  array of ResultDTO objects
      */
     public function import(array $data): void
     {

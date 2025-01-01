@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\Api\EventApiController;
 use App\Http\Controllers\Api\GroupApiController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*

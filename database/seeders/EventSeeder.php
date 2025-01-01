@@ -17,19 +17,19 @@ class EventSeeder extends Seeder
         $countries = ['Belgium', 'Germany', 'United Kingdom', 'France', 'Poland', 'Italy', 'United States', 'Canada'];
         $cities = ['Antwerp', 'Berlin', 'Brighton', 'Paris', 'Warsaw', 'Rome', 'New York', 'Seattle', 'Durham', 'Jacksonville'];
         foreach ($events as $event) {
-            if (!$event->description) {
+            if (! $event->description) {
                 $event->description = $faker->paragraphs(3, true);
             }
 
-            if (!$event->group_id) {
+            if (! $event->group_id) {
                 $event->group_id = $groups->random()->id;
             }
 
-            if (!$event->country) {
+            if (! $event->country) {
                 $event->country = $countries[array_rand($countries)];
             }
 
-            if (!$event->city) {
+            if (! $event->city) {
                 $event->city = $cities[array_rand($cities)];
             }
 

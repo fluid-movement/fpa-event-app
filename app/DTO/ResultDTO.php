@@ -2,17 +2,14 @@
 
 namespace App\DTO;
 
-class ResultDTO
+readonly class ResultDTO
 {
     public function __construct(
         public string $result_id,
         public string $event_id,
         public string $division,
-        public int    $round,
+        public int $round,
         public string $pool,
-        public array  $teams
-    )
-    {
-
-    }
+        public array $teams
+    ) {}
 }

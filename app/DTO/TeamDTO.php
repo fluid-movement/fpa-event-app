@@ -2,14 +2,12 @@
 
 namespace App\DTO;
 
-class TeamDTO
+readonly class TeamDTO
 {
     public function __construct(
         public string $resultId,
-        public array  $playerIds,
-        public int    $place,
-        public ?int    $points = 0
-    )
-    {
-    }
+        public array $playerIds,
+        public int $place,
+        public ?int $points = 0
+    ) {}
 }

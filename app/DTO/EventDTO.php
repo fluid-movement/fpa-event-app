@@ -2,15 +2,13 @@
 
 namespace App\DTO;
 
-class EventDTO
+readonly class EventDTO
 {
     public function __construct(
-        readonly string $id,
-        readonly string $name,
-        readonly string $start,
-        readonly string $end,
-        readonly string $created_at
-    )
-    {
-    }
+        public string $id,
+        public string $name,
+        public string $start,
+        public string $end,
+        public string $created_at
+    ) {}
 }

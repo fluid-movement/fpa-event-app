@@ -8,8 +8,7 @@ use App\Models\Event;
 class ImportEvents
 {
     /**
-     * @param array $data array of PlayerDTO objects
-     * @return void
+     * @param  array  $data  array of PlayerDTO objects
      */
     public function import(array $data): void
     {
@@ -19,7 +18,7 @@ class ImportEvents
                 continue;
             }
             $name = preg_replace('/^(?!1234)\d{4}\b/', '', $eventData->name) ?? '';
-            $event = new Event();
+            $event = new Event;
             $event->id = $eventData->id;
             $event->fill([
                 'name' => trim($name, ' \n\r\t\v\0-'),

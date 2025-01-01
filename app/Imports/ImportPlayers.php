@@ -8,8 +8,7 @@ use App\Models\Player;
 class ImportPlayers
 {
     /**
-     * @param array $data array of PlayerDTO objects
-     * @return void
+     * @param  array  $data  array of PlayerDTO objects
      */
     public function import(array $data): void
     {

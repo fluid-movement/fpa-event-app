@@ -1,12 +1,13 @@
 <?php
 
 use App\Livewire\Actions\Logout;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Livewire\Attributes\Layout;
 use Livewire\Volt\Component;
 
-new #[Layout('layouts.guest')] class extends Component
+new #[Layout('components.layouts.app')] class extends Component
 {
     /**
      * Send an email verification notification to the user.
@@ -14,7 +15,10 @@ new #[Layout('layouts.guest')] class extends Component
     public function sendVerification(): void
     {
         if (Auth::user()->hasVerifiedEmail()) {
-            $this->redirectIntended(default: route('dashboard', absolute: false), navigate: true);
+            $this->redirect(
+                session('url.intended', RouteServiceProvider::HOME),
+                navigate: true
+            );
 
             return;
         }
@@ -47,9 +51,9 @@ new #[Layout('layouts.guest')] class extends Component
     @endif
 
     <div class="mt-4 flex items-center justify-between">
-        <x-primary-button wire:click="sendVerification">
+        <x-button wire:click="sendVerification">
             {{ __('Resend Verification Email') }}
-        </x-primary-button>
+        </x-button>
 
         <button wire:click="logout" type="submit" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             {{ __('Log Out') }}

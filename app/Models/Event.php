@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Models\Scopes\OrderByStartAsc;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +15,7 @@ class Event extends Model
     use HasFactory, hasUuids;
 
     public static string $attending = 'attending';
+
     public static string $interested = 'interested';
 
     protected $guarded = ['id'];
@@ -59,7 +59,7 @@ class Event extends Model
 
     public function getLinkAttribute(): string
     {
-        return route('events.show', $this);
+        return route('events.view', $this);
     }
 
     protected static function booted()

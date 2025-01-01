@@ -27,7 +27,7 @@ class EventApiResource extends JsonResource
             'interested' => $this->belongsToMany(User::class)->wherePivot('status', Event::$interested)->count(),
             'attending' => $this->belongsToMany(User::class)->wherePivot('status', Event::$attending)->count(),
             'links' => [
-                //'web' => route('events.show', $this),
+                'web' => route('events.view', $this),
                 'api' => route('api-events.show', $this),
             ],
             'group' => new GroupApiResource($this->whenLoaded('group')),

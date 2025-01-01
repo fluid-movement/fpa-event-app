@@ -11,6 +11,7 @@ use App\Imports\ImportPlayers;
 use App\Imports\ImportResults;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Console\Isolatable;
+use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Support\Facades\Http;
 
 class ImportData extends Command implements Isolatable
@@ -31,6 +32,8 @@ class ImportData extends Command implements Isolatable
 
     /**
      * Execute the console command.
+     *
+     * @throws ConnectionException
      */
     public function handle()
     {
@@ -42,18 +45,21 @@ class ImportData extends Command implements Isolatable
 
         // import data
         $this->info('Importing players...');
-        (new ImportPlayers())->import($this->preparePlayerData($data));
+        (new ImportPlayers)->import($this->preparePlayerData($data));
         $this->info('Players imported');
 
         $this->info('Importing events...');
-        (new ImportEvents())->import($this->prepareEventData($data));
+        (new ImportEvents)->import($this->prepareEventData($data));
         $this->info('Events imported');
 
         $this->info('Importing results...');
-        (new ImportResults())->import($this->prepareResultData($data));
+        (new ImportResults)->import($this->prepareResultData($data));
         $this->info('Results imported');
     }
 
+    /**
+     * @throws ConnectionException
+     */
     public function download(): void
     {
         $response = Http::withOptions(['verify' => false])->acceptJson()->get(config('import.url'));
@@ -78,6 +84,7 @@ class ImportData extends Command implements Isolatable
                 );
             }
         }
+
         return $playerObjects;
     }
 
@@ -95,6 +102,7 @@ class ImportData extends Command implements Isolatable
                 );
             }
         }
+
         return $eventObjects;
     }
 
@@ -104,11 +112,11 @@ class ImportData extends Command implements Isolatable
         if ($data && is_array($data['resultsData'])) {
             foreach ($data['resultsData'] as $result) {
                 foreach ($result['resultsData'] as $round => $rounds) {
-                    if (!str_starts_with($round, 'round')) {
+                    if (! str_starts_with($round, 'round')) {
                         continue; // skip non-result data
                     }
                     foreach ($rounds as $pool => $pools) {
-                        if (!str_starts_with($pool, 'pool')) {
+                        if (! str_starts_with($pool, 'pool')) {
                             continue; // skip non-result data
                         }
                         $teams = [];
@@ -134,6 +142,7 @@ class ImportData extends Command implements Isolatable
                 }
             }
         }
+
         return $resultObjects;
     }
 }

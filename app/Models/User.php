@@ -13,7 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasUuids;
+    use HasApiTokens, HasFactory, HasUuids, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -63,19 +63,19 @@ class User extends Authenticatable
 
     public function notAttending(Event $event): bool
     {
-        return !$this->events()->find($event->id);
+        return ! $this->events()->find($event->id);
     }
 
     public function attending(Event $event): bool
     {
-        return !!$this->belongsToMany(Event::class)
+        return (bool) $this->belongsToMany(Event::class)
             ->wherePivot('status', Event::$attending)
             ->find($event->id);
     }
 
     public function interested(Event $event): bool
     {
-        return !!$this->belongsToMany(Event::class)
+        return (bool) $this->belongsToMany(Event::class)
             ->wherePivot('status', Event::$interested)
             ->find($event->id);
     }

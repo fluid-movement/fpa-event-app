@@ -22,6 +22,7 @@ class EventFactory extends Factory
         $days = rand(0, 3);
         $end->add(new \DateInterval("P{$days}D"));
         $name = $this->faker->words(rand(1, 3), true);
+
         return [
             'name' => $name,
             'slug' => \Str::slug($name),
