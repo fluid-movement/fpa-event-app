@@ -15,12 +15,17 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-200 text-slate-700">
-<livewire:layout.navigation/>
-<div class="mx-auto max-w-6xl">
+<div class="mx-auto max-w-6xl flex flex-col md:flex-row">
+    <div class="hidden md:block">
+        <livewire:layout.navigation-desktop/>
+    </div>
     <div class="bg-white bg-opacity-50 px-2 pt-4 pb-6 md:px-4">
         {{ $slot }}
+        <x-footer/>
     </div>
-    <x-footer/>
+    <div class="block md:hidden">
+        <livewire:layout.navigation-mobile/>
+    </div>
 </div>
 @bukScripts
 </body>

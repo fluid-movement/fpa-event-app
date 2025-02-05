@@ -31,9 +31,9 @@ Route::get('dashboard/profile', Dashboard\DashboardProfile::class)
     ->middleware(['auth', 'verified'])
     ->name('dashboard.profile');
 
-Route::get('events/', EventIndex::class)
+Route::get('events/{year?}', EventIndex::class)
     ->name('events.index');
-Route::get('events/{event}', EventView::class)
+Route::get('events/detail/{event}', EventView::class)
     ->name('events.view');
 Route::get('events/{event}/edit', EventEdit::class)
     ->middleware(['auth', 'verified'])

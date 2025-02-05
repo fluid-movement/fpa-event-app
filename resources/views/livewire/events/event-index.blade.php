@@ -12,7 +12,7 @@
                                 <li wire:key="{{$event->id}}">
                                     <span class="text-slate-400">{{$event->start->format('jS')}}</span>
                                     <a class="text-lg font-bold"
-                                       href="{{ route('events.view', ['event' => $event]) }}"
+                                       href="{{ $event->link }}"
                                        wire:navigate>
                                         {{ $event->name }}
                                     </a>

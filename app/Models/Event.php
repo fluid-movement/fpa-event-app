@@ -62,6 +62,11 @@ class Event extends Model
         return route('events.view', $this);
     }
 
+    public function isOneDay(): bool
+    {
+        return $this->start->isSameDay($this->end);
+    }
+
     protected static function booted()
     {
         static::addGlobalScope(new OrderByStartAsc);

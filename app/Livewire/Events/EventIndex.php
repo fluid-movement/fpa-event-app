@@ -3,15 +3,18 @@
 namespace App\Livewire\Events;
 
 use App\Models\Event;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Livewire\Component;
 
 class EventIndex extends Component
 {
     public $sortedEvents;
 
-    public function mount()
+    public function mount(int $year = null)
     {
-        $this->sortedEvents = $this->getSortedEvents();
+        $year = $year ?? Carbon::now()->year;
+        $this->sortedEvents = $this->getSortedEvents($year);
     }
 
     public function render()
@@ -19,10 +22,13 @@ class EventIndex extends Component
         return view('livewire.events.event-index');
     }
 
-    protected function getSortedEvents()
+    protected function getSortedEvents(int $year): array
     {
         $events = [];
-        foreach (Event::with('group')->get() as $event) {
+        $eventCollection = Event::whereYear('start', $year)
+            ->with('group')
+            ->get();
+        foreach ($eventCollection as $event) {
             $events[$event->start->format('Y')][$event->start->format('F')][] = $event;
         }
 
